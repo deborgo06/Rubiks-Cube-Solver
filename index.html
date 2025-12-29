@@ -1,53 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Rubik’s Cube Solver</title>
+<meta charset="UTF-8">
+<title>Rubik’s Cube Solver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 440px;
+    padding: 35px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    color: #fff;
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+label {
+    font-size: 14px;
+    margin-top: 15px;
+    display: block;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 6px;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
+}
+
+button {
+    margin-top: 22px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #ff9966, #ff5e62);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.output {
+    margin-top: 22px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.25);
+    font-family: monospace;
+    min-height: 60px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 12px;
+    opacity: 0.75;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Rubik’s Cube Solver</h1>
+<div class="card">
+    <h1>🧩 Rubik’s Cube Solver</h1>
+    <div class="subtitle">Graph Algorithms • OOP • Java Backend</div>
 
-<input id="scramble" value="ANYTHING">
+    <label>Cube Scramble</label>
+    <input id="scramble" placeholder="Enter scramble (e.g. TEST)">
 
-<select id="method">
-    <option value="BFS">BFS</option>
-    <option value="ASTAR">A*</option>
-    <option value="KOCIEMBA" selected>Kociemba</option>
-</select>
+    <label>Algorithm</label>
+    <select id="method">
+        <option value="BFS">BFS</option>
+        <option value="ASTAR">A*</option>
+        <option value="KOCIEMBA">Kociemba</option>
+    </select>
 
-<button onclick="solve()">Solve</button>
+    <button onclick="solve()">Solve Cube</button>
 
-<h3>Output:</h3>
-<pre id="output"></pre>
+    <div class="output" id="output">
+        Solution will appear here ✨
+    </div>
+
+    <div class="footer">
+        © 2025 • Rubik’s Cube Solver
+    </div>
+</div>
 
 <script>
 function solve() {
+    const output = document.getElementById("output");
+    output.innerText = "Solving... ⏳";
+
     fetch("http://localhost:8080/solve", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
             scramble: document.getElementById("scramble").value,
             method: document.getElementById("method").value
         })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("HTTP error " + response.status);
-        }
-        return response.json();
-    })
+    .then(res => res.json())
     .then(data => {
-        document.getElementById("output").innerText = data.solution;
+        output.innerText = data.solution;
     })
-    .catch(error => {
-        document.getElementById("output").innerText = error;
+    .catch(() => {
+        output.innerText = "❌ Backend not reachable";
     });
 }
 </script>
 
-
 </body>
 </html>
-
