@@ -12,7 +12,7 @@ public class FrontendServer {
 
         server.createContext("/", (HttpExchange exchange) -> {
 
-            File file = new File("index.html"); // ✅ FIXED PATH
+            File file = new File("index.html"); 
 
             if (!file.exists()) {
                 String msg = "index.html not found";
@@ -33,3 +33,4 @@ public class FrontendServer {
         System.out.println("Frontend running at http://localhost:5600");
     }
 }
+
