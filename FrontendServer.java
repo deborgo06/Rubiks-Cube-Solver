@@ -29,7 +29,8 @@ public class FrontendServer {
         });
 
         server.start();
-        System.out.println("Frontend running at http://localhost:5500");
+        System.out.println("Frontend running at http://localhost:5600");
     }
 }
+
 
