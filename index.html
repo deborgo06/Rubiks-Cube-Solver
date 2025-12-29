@@ -29,18 +29,11 @@ body {
     backdrop-filter: blur(12px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     color: #fff;
-    animation: fadeIn 0.8s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
     text-align: center;
     font-weight: 600;
-    margin-bottom: 5px;
 }
 
 .subtitle {
@@ -62,12 +55,6 @@ input, select {
     border-radius: 10px;
     border: none;
     margin-top: 6px;
-    font-size: 14px;
-    outline: none;
-}
-
-input:focus, select:focus {
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
 }
 
 button {
@@ -81,12 +68,6 @@ button {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .output {
@@ -97,7 +78,6 @@ button:hover {
     font-family: monospace;
     min-height: 60px;
     text-align: center;
-    animation: fadeIn 0.5s ease;
 }
 
 .footer {
@@ -113,7 +93,7 @@ button:hover {
 
 <div class="card">
     <h1>🧩 Rubik’s Cube Solver</h1>
-    <div class="subtitle">Graph Algorithms • OOP • Java Backend</div>
+    <div class="subtitle">Graph Algorithms • OOP • AI (Demo)</div>
 
     <label>Cube Scramble</label>
     <input id="scramble" placeholder="Enter scramble (e.g. TEST)">
@@ -121,14 +101,14 @@ button:hover {
     <label>Algorithm</label>
     <select id="method">
         <option value="BFS">BFS</option>
-        <option value="ASTAR">A*</option>
+        <option value="ASTAR">A* (AI Demo)</option>
         <option value="KOCIEMBA">Kociemba</option>
     </select>
 
     <button onclick="solve()">Solve Cube</button>
 
     <div class="output" id="output">
-        Solution will appear here ✨
+        Solution will appear here
     </div>
 
     <div class="footer">
@@ -139,7 +119,7 @@ button:hover {
 <script>
 function solve() {
     const output = document.getElementById("output");
-    output.innerText = "Solving... ⏳";
+    output.innerText = "Solving...";
 
     fetch("http://localhost:8080/solve", {
         method: "POST",
@@ -154,7 +134,7 @@ function solve() {
         output.innerText = data.solution;
     })
     .catch(() => {
-        output.innerText = "❌ Backend not reachable";
+        output.innerText = "Backend not reachable";
     });
 }
 </script>
