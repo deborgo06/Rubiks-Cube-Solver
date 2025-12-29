@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rubik’s Cube Solver</title>
+</head>
+<body>
+
+<h1>Rubik’s Cube Solver</h1>
+
+<input id="scramble" value="ANYTHING">
+
+<select id="method">
+    <option value="BFS">BFS</option>
+    <option value="ASTAR">A*</option>
+    <option value="KOCIEMBA" selected>Kociemba</option>
+</select>
+
+<button onclick="solve()">Solve</button>
+
+<h3>Output:</h3>
+<pre id="output"></pre>
+
+<script>
+function solve() {
+    fetch("http://localhost:8080/solve", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            scramble: document.getElementById("scramble").value,
+            method: document.getElementById("method").value
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById("output").innerText = data.solution;
+    })
+    .catch(error => {
+        document.getElementById("output").innerText = error;
+    });
+}
+</script>
+
+
+</body>
+</html>
+
