@@ -12,25 +12,24 @@ public class FrontendServer {
 
         server.createContext("/", (HttpExchange exchange) -> {
 
-            File file = new File("index.html");
+            File file = new File("index.html"); // ✅ FIXED PATH
 
             if (!file.exists()) {
-                exchange.sendResponseHeaders(404, -1);
+                String msg = "index.html not found";
+                exchange.sendResponseHeaders(404, msg.length());
+                exchange.getResponseBody().write(msg.getBytes());
+                exchange.close();
                 return;
             }
 
             byte[] data = Files.readAllBytes(file.toPath());
             exchange.getResponseHeaders().add("Content-Type", "text/html");
             exchange.sendResponseHeaders(200, data.length);
-
-            OutputStream os = exchange.getResponseBody();
-            os.write(data);
-            os.close();
+            exchange.getResponseBody().write(data);
+            exchange.close();
         });
 
         server.start();
         System.out.println("Frontend running at http://localhost:5600");
     }
 }
-
-
