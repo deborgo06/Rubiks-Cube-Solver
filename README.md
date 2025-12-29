@@ -1,6 +1,6 @@
 # 🧩 Rubik’s Cube Solver
 
-A Rubik’s Cube Solver built using **Java**, **Graph Algorithms**, and a **web-based frontend**.  
+A Rubik’s Cube Solver built using **Java**, **Graph Algorithms**, and a **web-based frontend**.
 The project demonstrates how classic search algorithms can be applied to a complex state-space problem using clean Object-Oriented design and a simple client–server architecture.
 
 ---
@@ -10,7 +10,7 @@ The project demonstrates how classic search algorithms can be applied to a compl
 **Backend**
 - Java
 - Built-in Java HTTP Server
-- Object-Oriented Programming
+- Object-Oriented Programming(OOP)
 
 **Frontend**
 - HTML
@@ -19,18 +19,17 @@ The project demonstrates how classic search algorithms can be applied to a compl
 
 **Algorithms**
 - Breadth-First Search (BFS)
-- A* Search
+- A* Search(heuristic-based demo)
 - Kociemba Algorithm (Demo)
 
 ---
 
 ## ⚙️ How It Works
-
-1. User enters a cube scramble and selects an algorithm  
-2. Frontend sends data to backend via HTTP POST  
-3. Backend models the cube as a state-space graph  
-4. Selected algorithm computes the solution  
-5. Move sequence is returned and displayed on the UI  
+1. User enters a cube scramble and selects an algorithm
+2. Frontend sends data to backend via HTTP POST
+3. Backend models the cube as a state-space graph
+4. Selected algorithm computes the solution
+5. Move sequence is returned and displayed on the UI 
 
 ---
 
@@ -43,8 +42,9 @@ The project demonstrates how classic search algorithms can be applied to a compl
 
 ### A* Search
 - Uses heuristic-based informed search  
-- Faster than BFS for complex states  
+- Demonstrates AI-inspired decision making
+- Implemented as a heuristic demo  
 
 ### Kociemba (Demo)
 - Industry-standard two-phase solving approach  
-- Implemented here as a demo solver  
+- Implemented here as a demo solver for optimal solutions
